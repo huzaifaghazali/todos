@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import CssBaseline from "@mui/material/CssBaseline";
-import TodoList from './TodoList';
+import TodoList from './components/TodoList';
 
 function App() {
 
