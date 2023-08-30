@@ -1,16 +1,22 @@
-import CssBaseline from "@mui/material/CssBaseline";
+import { CssBaseline, Box } from '@mui/material';
+
 import TodoList from './components/TodoList';
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar';
+
+import { AppState } from './context/AppState';
 
 function App() {
-
   return (
     <>
-      <CssBaseline />
-      <Navbar />
-      <TodoList />
+      <AppState>
+        <Box>
+          <CssBaseline />
+          <Navbar />
+          <TodoList />
+        </Box>
+      </AppState>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
