@@ -16,5 +16,27 @@ export function useTodoList(currentList) {
 
   return {
     data,
+    // Create new item
+    async newItem(newItemName) {
+      const newItemsData = {
+        name: newItemName,
+        checked: false,
+        id: crypto.randomUUID(),
+      };
+      return await mutate(
+        await putter({
+          url: APIs.TodoList,
+          id: currentList,
+          name: newItemName,
+        }),
+        {
+          populateCache: false,
+          optimisticData: (oldData) => ({
+            ...oldData,
+            items: [...oldData.items, newItemsData],
+          }),
+        }
+      );
+    },
   };
 }
