@@ -38,5 +38,21 @@ export function useTodoList(currentList) {
         }
       );
     },
+    // Delete item
+    async deleteItem(itemToDelete) {
+      return await mutate(
+        await putter({
+          url: APIs.TodoListDelete,
+          id: itemToDelete,
+        }),
+        {
+          populateCache: false, // because our putter doesn't return the new item so we want to refetch it instead
+          optimisticData: (oldData) => ({
+            ...oldData,
+            items: oldData.items.filter(({ id }) => id !== itemToDelete),
+          }),
+        }
+      );
+    },
   };
 }
