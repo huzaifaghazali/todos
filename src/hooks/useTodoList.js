@@ -83,5 +83,34 @@ export function useTodoList(currentList) {
         }
       );
     },
+    // Update item
+    async updateItem(itemToUpdate, newItemName) {
+      return await mutate(
+        await putter({
+          url: APIs.TodoListUpdate,
+          id: itemToUpdate,
+          name: newItemName,
+        }),
+        {
+          populateCache: false,
+          optimisticData: (oldData) => {
+            const oldItem = oldData.items.find(({ id }) => id === itemToUpdate);
+            return {
+              ...oldData,
+              items: [
+                ...oldData.items.slice(
+                  0,
+                  oldData.items.findIndex(({ id }) => id === itemToUpdate)
+                ),
+                { ...oldItem, name: newItemName },
+                ...oldData.items.slice(
+                  oldData.items.findIndex(({ id }) => id === itemToUpdate) + 1
+                ),
+              ],
+            };
+          },
+        }
+      );
+    },
   };
 }
