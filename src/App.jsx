@@ -1,6 +1,6 @@
 import { CssBaseline, Box } from '@mui/material';
 
-import TodoList from './components/TodoList';
+import AllTodoLists from './components/AllTodoLists';
 import AppHeader from './components/AppHeader';
 
 import { AppState } from './context/AppState';
@@ -12,7 +12,7 @@ function App() {
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppHeader />
-          <TodoList />
+          <AllTodoLists />
         </Box>
       </AppState>
     </>
