@@ -101,6 +101,8 @@ export function NewListDialog({ dialogState }) {
         <Button
           onClick={() => {
             void newList(state, icon);
+            setState('');
+            setIcon('')
             dialogState.close();
           }}
         >
