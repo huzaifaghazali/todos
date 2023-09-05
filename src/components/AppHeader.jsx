@@ -2,8 +2,14 @@ import { Add } from '@mui/icons-material';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 
+import { NewListDialog } from './NewListDialog';
+
 export default function Navbar() {
+  const dialogState = usePopupState({ variant: 'dialog', popupId: 'new-list' });
+
   return (
+    <>
+      <NewListDialog dialogState={dialogState} />
       <AppBar
         position='fixed'
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -17,10 +23,12 @@ export default function Navbar() {
             edge='start'
             color='inherit'
             aria-label='menu'
+            onClick={dialogState.open}
           >
             <Add />
           </IconButton>
         </Toolbar>
       </AppBar>
+    </>
   );
 }
